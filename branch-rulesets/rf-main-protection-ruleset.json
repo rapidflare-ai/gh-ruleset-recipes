@@ -1,0 +1,66 @@
+{
+  "id": 3362980,
+  "name": "Main Protection Ruleset",
+  "target": "branch",
+  "source_type": "Repository",
+  "source": "rapidflare-ai/rf-sources",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": [
+        "~DEFAULT_BRANCH"
+      ]
+    }
+  },
+  "rules": [
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "required_linear_history"
+    },
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 1,
+        "dismiss_stale_reviews_on_push": true,
+        "require_code_owner_review": false,
+        "require_last_push_approval": true,
+        "required_review_thread_resolution": true,
+        "automatic_copilot_code_review_enabled": true,
+        "allowed_merge_methods": [
+          "rebase",
+          "squash"
+        ]
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "strict_required_status_checks_policy": true,
+        "do_not_enforce_on_create": false,
+        "required_status_checks": [
+          {
+            "context": "unit-test",
+            "integration_id": 15368
+          },
+          {
+            "context": "Run linter and type Checker",
+            "integration_id": 15368
+          }
+        ]
+      }
+    }
+  ],
+  "bypass_actors": [
+    {
+      "actor_id": 2,
+      "actor_type": "RepositoryRole",
+      "bypass_mode": "always"
+    }
+  ]
+}
